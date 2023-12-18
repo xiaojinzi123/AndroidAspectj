@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -22,6 +23,7 @@ import com.xiaojinzi.aspectj.user.ModuleUserAspectjForKotlin
 import com.xiaojinzi.support.ktx.nothing
 import com.xiaojinzi.support.ktx.toStringItemDto
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.launch
 
 @InternalCoroutinesApi
 @ExperimentalMaterialApi
@@ -30,6 +32,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 @ExperimentalFoundationApi
 @Composable
 private fun MainView() {
+    val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val vm: MainViewModel = viewModel()
     Column(
@@ -49,6 +52,9 @@ private fun MainView() {
             TestAspectjForJava().test()
             TestAspectjForKotlin().test()
             ModuleUserAspectjForKotlin().test()
+            scope.launch {
+                TestAspectjForKotlin().testSuspend()
+            }
         }
 
     }

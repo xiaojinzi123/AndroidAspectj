@@ -21,6 +21,9 @@ public class AppAspectjDec {
     private static final String POINTCUT_METHOD3 =
             "execution(* com.xiaojinzi.aspectj.app1.module.main.view.MainAct.onCreate(..))";
 
+    private static final String POINTCUT_METHOD4 =
+            "execution(* com.xiaojinzi.aspectj.app1.TestAspectjForKotlin.testSuspend(..))";
+
     @Around(POINTCUT_METHOD1)
     public Object testAspectjForJava(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
@@ -61,9 +64,30 @@ public class AppAspectjDec {
             String methodName = methodSignature.getName();
             Log.d(
                     "TestAspectj",
-                    "Around moduleUserAspectjForKotlin className + " + className + ",methodName = " + methodName
+                    "Around 1 moduleUserAspectjForKotlin className + " + className + ",methodName = " + methodName
             );
             return joinPoint.proceed();
+        } catch (Exception e) {
+            return joinPoint.proceed();
+        }
+    }
+
+    @Around(POINTCUT_METHOD4)
+    public Object testSuspendAspectjForKotlin(ProceedingJoinPoint joinPoint) throws Throwable {
+        try {
+            MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+            String className = methodSignature.getDeclaringType().getSimpleName();
+            String methodName = methodSignature.getName();
+            Log.d(
+                    "TestAspectj",
+                    "Around before testSuspendAspectjForKotlin className + " + className + ",methodName = " + methodName
+            );
+            Object result = joinPoint.proceed();
+            Log.d(
+                    "TestAspectj",
+                    "Around after testSuspendAspectjForKotlin className + " + className + ",methodName = " + methodName
+            );
+            return result;
         } catch (Exception e) {
             return joinPoint.proceed();
         }

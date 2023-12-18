@@ -11,4 +11,11 @@ class TestAspectjForKotlin {
         )
     }
 
+    suspend fun testSuspend() {
+        Log.d(
+            "TestAspectj",
+            "TestAspectjForKotlin.testSuspend()"
+        )
+    }
+
 }
