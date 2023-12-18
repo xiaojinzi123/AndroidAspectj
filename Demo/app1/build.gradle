@@ -19,6 +19,11 @@ ksp {
     }
 }*/
 
+aspectjConfig {
+    enable = true
+    enableLoopSolve = true
+}
+
 android {
 
     namespace 'com.xiaojinzi.aspectj.app1'
