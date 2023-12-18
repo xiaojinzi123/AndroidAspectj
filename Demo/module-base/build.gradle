@@ -1,0 +1,39 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'com.google.devtools.ksp'
+    id 'kotlin-parcelize'
+}
+
+android {
+    namespace 'com.xiaojinzi.aspectj.base'
+}
+
+apply from: project.getRootProjectPath() + "/common_android.gradle"
+apply from: project.getRootProjectPath() + "/common_ksp_for_component.gradle"
+
+ksp {
+    arg("ModuleName", "base")
+}
+
+dependencies {
+    api project(':Demo:lib-resource')
+
+    api libs.support_logger
+    api libs.support_ktx
+    api libs.support_compose
+    api libs.support_architecture
+
+    api libs.accompanist_pager
+    api libs.accompanist_swiperefresh
+    api libs.accompanist_sysuicontrol
+    api libs.accompanist_flowlayout
+    api libs.accompanist_placeholder
+    api libs.accompanist_permissions
+    api libs.accompanist_webview
+
+    api libs.lottie_compose
+
+    api "org.aspectj:aspectjrt:1.9.21"
+
+}

@@ -1,0 +1,120 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.xiaojinzi.aspectj",
+    "module": "aspectj-plugin",
+    "version": "1.0.0-beta1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "aspectj-plugin-1.0.0-beta1.jar",
+          "url": "aspectj-plugin-1.0.0-beta1.jar",
+          "size": 16858,
+          "sha512": "1ff34424de6392ed3b8faee499d3b2dcc0199e015c12258f99f375b9f2114a8574ee40857c0efcbc4871c1ccbfbdf53a0ee7023256600f7479ebd7584dfa043c",
+          "sha256": "9f95d3f48ffd3cc50360d00e0eba3c57c6de598063c64857edce38aed6bfd4c3",
+          "sha1": "66cb5c2ceadb290397dcf05b34662f5e522fa6eb",
+          "md5": "a7846b8f079eb508afe79f13337171c7"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools.build",
+          "module": "gradle",
+          "version": {
+            "requires": "8.2.0"
+          }
+        },
+        {
+          "group": "org.aspectj",
+          "module": "aspectjtools",
+          "version": {
+            "requires": "1.9.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "aspectj-plugin-1.0.0-beta1.jar",
+          "url": "aspectj-plugin-1.0.0-beta1.jar",
+          "size": 16858,
+          "sha512": "1ff34424de6392ed3b8faee499d3b2dcc0199e015c12258f99f375b9f2114a8574ee40857c0efcbc4871c1ccbfbdf53a0ee7023256600f7479ebd7584dfa043c",
+          "sha256": "9f95d3f48ffd3cc50360d00e0eba3c57c6de598063c64857edce38aed6bfd4c3",
+          "sha1": "66cb5c2ceadb290397dcf05b34662f5e522fa6eb",
+          "md5": "a7846b8f079eb508afe79f13337171c7"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "aspectj-plugin-1.0.0-beta1-sources.jar",
+          "url": "aspectj-plugin-1.0.0-beta1-sources.jar",
+          "size": 3035,
+          "sha512": "4b75421ced84e23f456328e9357c68f4a09e347cf38712c7a6d900ac90cacf69ac4f9d76faf515e8cad8e9d7cc70d7b6c810827820fbe84625445729fd1c7a9a",
+          "sha256": "15d73a0bf498d39fced66019ca1bc187c92089b63c72181036217bf1c5a24ceb",
+          "sha1": "9857ce20381f1a6245151906948f812103755f08",
+          "md5": "98a938de66b9f5a6ffe3149bba131c34"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "aspectj-plugin-1.0.0-beta1-javadoc.jar",
+          "url": "aspectj-plugin-1.0.0-beta1-javadoc.jar",
+          "size": 261,
+          "sha512": "c84bb5f43cfc4526baf546a57951f8ebdc6ec6bbf71727be15063a6632198b86b3ddb14712a56248eabf632c4e9bc2a4b029bf83576adab33be47329333a3238",
+          "sha256": "44646b0d8953b51da398652183b2d836c60584ef454b240394e41b76aff79730",
+          "sha1": "bb8ee03cb7c482d7abc89a2a51db21511a956394",
+          "md5": "64ddb15628057020edffe01c5c5cd658"
+        }
+      ]
+    }
+  ]
+}

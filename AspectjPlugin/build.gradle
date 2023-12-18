@@ -1,0 +1,60 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'maven-publish'
+    id 'org.gradle.kotlin.kotlin-dsl' version '4.2.1'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_17.toString()))
+    }
+}
+
+group = 'com.xiaojinzi.aspectj'
+archivesBaseName = 'aspectj-plugin'
+version = "${versions.aspectj_plugin_upload_version}"
+
+// 配置模块的 freeCompilerArgs 参数
+/*tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions {
+        freeCompilerArgs += [
+                "-Xjvm-default=all",
+        ]
+    }
+}*/
+
+/*kotlin {
+    jvmToolchain(JavaVersion.VERSION_17)
+}*/
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:8.2.0'
+    // 依赖 aspectjtools
+    implementation 'org.aspectj:aspectjtools:1.9.21'
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = archivesBaseName
+            version = version
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = "$rootDir/RepoAspectj"
+        }
+    }
+}
