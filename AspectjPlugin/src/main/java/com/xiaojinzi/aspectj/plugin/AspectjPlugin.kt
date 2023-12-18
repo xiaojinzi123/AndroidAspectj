@@ -69,6 +69,13 @@ class AspectjPlugin : Plugin<Project> {
             val inputs: List<java.nio.file.Path> =
                 (allJarList + allDirectories.get()).map { it.asFile.toPath() }
 
+            val isContainsOutputFile = allJarList
+                .find {
+                    it.asFile == outputFile
+                } != null
+
+            println("$TAG, isContainsOutputFile = $isContainsOutputFile")
+
             // cacheFolder.deleteRecursively()
 
             val handler = MessageHandler(true)
