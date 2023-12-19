@@ -20,8 +20,10 @@ ksp {
 }*/
 
 aspectjConfig {
+    ignoreOutputJar = true
     enable = true
-    enableLoopSolve = true
+    // logError = true
+    loopSolveCount = -1
 }
 
 android {

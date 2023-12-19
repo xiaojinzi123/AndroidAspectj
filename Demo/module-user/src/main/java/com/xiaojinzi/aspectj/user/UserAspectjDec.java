@@ -23,7 +23,7 @@ public class UserAspectjDec {
         String methodName = methodSignature.getName();
         Log.d(
                 "TestAspectj",
-                "UserAspectjDec After moduleUserAspectjForKotlin className + " + className + ",methodName = " + methodName
+                "UserAspectjDec After 1211212 moduleUserAspectjForKotlin className + " + className + ",methodName = " + methodName
         );
     }
 

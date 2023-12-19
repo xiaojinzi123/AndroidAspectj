@@ -57,6 +57,7 @@ class AspectjPlugin : Plugin<Project> {
         abstract var classpath: FileCollection
 
         private val cacheFolder = File(project.buildDir, "aspectj")
+        // private val cacheFolder = File(System.getProperty("java.io.tmpdir"), "aspectj")
 
         private val logger = project.logger
 
@@ -70,56 +71,78 @@ class AspectjPlugin : Plugin<Project> {
 
             val outputFile = outputFile.asFile.get()
             val allJarList = allJars.get()
-
-            val inputs: List<java.nio.file.Path> =
-                (allJarList + allDirectories.get()).map { it.asFile.toPath() }
-
             val isContainsOutputFile = allJarList
                 .find {
                     it.asFile == outputFile
                 } != null
             println("$TAG, isContainsOutputFile = $isContainsOutputFile")
+            val targetALlJarList = if (aspectjConfig.ignoreOutputJar == true) {
+                allJarList.filter {
+                    it.asFile != outputFile
+                }
+            } else {
+                allJarList
+            }
 
-            val isLoop = aspectjConfig.enableLoopSolve?: false
+            val inputs: List<java.nio.file.Path> =
+                (targetALlJarList + allDirectories.get()).map { it.asFile.toPath() }
+
+            val loopCount = aspectjConfig.loopSolveCount ?: 1
+            val targetLoopCount = when {
+                loopCount == -1 -> Int.MAX_VALUE
+                loopCount < 1 -> throw IllegalArgumentException("loopSolveCount must be greater than 0")
+                else -> loopCount
+            }
 
             val action = {
-                val targetCacheFolder = File(cacheFolder, "${System.currentTimeMillis()}")
+                val targetCacheFolder = File(cacheFolder, "output")
+                // val targetCacheFolder = File(cacheFolder, "${System.currentTimeMillis()}")
+                // val targetCacheFolder = cacheFolder
                 println("$TAG, targetCacheFolder = $targetCacheFolder")
 
                 val handler = MessageHandler(true)
+                val list1 = listOf(
+                    /*"-log", File(cacheFolder, "log.txt").path,*/
+                    "-source", aspectjConfig.sourceCompatibility,
+                    "-target", aspectjConfig.targetCompatibility,
+                    "-inpath",
+                    inputs
+                        .joinToString(
+                            separator = File.pathSeparator,
+                        ).apply {
+                            // println("$TAG, inputs.size = ${inputs.size} inputs = $this")
+                        },
+                    "-aspectpath",
+                    classpath.asPath.apply {
+                        // println("$TAG, javaCompile.classpath = $this")
+                    },
+                    /*"outjar", outputFile.path.apply {
+                        println("${AspectjPlugin.TAG}, outputFile = $this")
+                    },*/
+                    "-d",
+                    targetCacheFolder.path.apply {
+                        // println("$TAG, destinationDirectory = $this")
+                    },
+                    "-classpath", classpath.asPath,
+                    "-bootclasspath",
+                    bootClasspath
+                        .get()
+                        .joinToString(
+                            separator = File.pathSeparator,
+                        ).apply {
+                            // println("$TAG, bootclasspath = $this")
+                        },
+                )
+                val aspectjArgs = buildList {
+                    if (aspectjConfig.logError) {
+                        add("-showWeaveInfo")
+                    }
+                    addAll(list1)
+                }.apply {
+                    println("$TAG, aspectjArgs = ${this.joinToString(separator = ", ")}")
+                }
                 org.aspectj.tools.ajc.Main().run(
-                    arrayOf(
-                        "-showWeaveInfo",
-                        "-source", aspectjConfig.sourceCompatibility,
-                        "-target", aspectjConfig.targetCompatibility,
-                        "-inpath",
-                        inputs
-                            .joinToString(
-                                separator = File.pathSeparator,
-                            ).apply {
-                                println("$TAG, inputs.size = ${inputs.size} inputs = $this")
-                            },
-                        "-aspectpath",
-                        classpath.asPath.apply {
-                            println("$TAG, javaCompile.classpath = $this")
-                        },
-                        /*"outjar", outputFile.path.apply {
-                            println("${AspectjPlugin.TAG}, outputFile = $this")
-                        },*/
-                        "-d",
-                        targetCacheFolder.path.apply {
-                            println("$TAG, destinationDirectory = $this")
-                        },
-                        "-classpath", classpath.asPath,
-                        "-bootclasspath",
-                        bootClasspath
-                            .get()
-                            .joinToString(
-                                separator = File.pathSeparator,
-                            ).apply {
-                                println("$TAG, bootclasspath = $this")
-                            },
-                    ),
+                    aspectjArgs.toTypedArray(),
                     handler,
                 )
 
@@ -127,13 +150,24 @@ class AspectjPlugin : Plugin<Project> {
                     null, true
                 ).forEach { message ->
                     when (message.kind) {
-                        IMessage.INFO -> logger.info(message.message, message.thrown)
-                        IMessage.DEBUG -> logger.debug(message.message, message.thrown)
-                        IMessage.WARNING -> logger.warn(message.message, message.thrown)
+                        IMessage.INFO -> if (aspectjConfig.logError) {
+                            logger.info(message.message, message.thrown)
+                        }
+
+                        IMessage.DEBUG -> if (aspectjConfig.logError) {
+                            logger.debug(message.message, message.thrown)
+                        }
+
+                        IMessage.WARNING -> if (aspectjConfig.logError) {
+                            logger.warn(message.message, message.thrown)
+                        }
+
                         IMessage.ERROR,
                         IMessage.FAIL,
                         IMessage.ABORT -> {
-                            logger.error(message.message, message.thrown)
+                            if (aspectjConfig.logError) {
+                                logger.error(message.message, message.thrown)
+                            }
                             throw message.thrown
                         }
 
@@ -143,22 +177,18 @@ class AspectjPlugin : Plugin<Project> {
                 targetCacheFolder
             }
 
-            val targetCacheFolder = if (isLoop) {
-                var resultFolder: File
-                var count = 1
-                while (true) {
-                    try {
-                        println("$TAG, 第 $count 次执行")
-                        resultFolder = action.invoke()
-                        break
-                    } catch (_: Exception) {
-                    }
-                    count++
+            var targetCacheFolder: File? = null
+            var count = 1
+            while (count <= targetLoopCount) {
+                try {
+                    println("$TAG, 第 $count 次执行")
+                    targetCacheFolder = action.invoke()
+                    break
+                } catch (_: Exception) {
                 }
-                resultFolder
-            } else {
-                action.invoke()
+                count++
             }
+            targetCacheFolder ?: throw RuntimeException("aspect 织入失败")
 
             println("$TAG, 准备合并到 ${outputFile.name} 中, 当前是否存在：${outputFile.exists()}")
 
@@ -232,7 +262,9 @@ class AspectjPlugin : Plugin<Project> {
                     .set(
                         EXT_ASPECTJ_CONFIG,
                         AspectjConfig(
-                            enableLoopSolve = aspectjConfig?.enableLoopSolve,
+                            ignoreOutputJar = aspectjConfig?.ignoreOutputJar,
+                            loopSolveCount = aspectjConfig?.loopSolveCount,
+                            logError = aspectjConfig?.logError ?: false,
                             sourceCompatibility = baseAppModuleExtension.compileOptions.sourceCompatibility.toString(),
                             targetCompatibility = baseAppModuleExtension.compileOptions.targetCompatibility.toString(),
                         ).apply {

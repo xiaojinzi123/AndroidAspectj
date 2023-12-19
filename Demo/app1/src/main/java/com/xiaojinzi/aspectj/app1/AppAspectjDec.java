@@ -64,7 +64,7 @@ public class AppAspectjDec {
             String methodName = methodSignature.getName();
             Log.d(
                     "TestAspectj",
-                    "Around 121212 moduleUserAspectjForKotlin className + " + className + ",methodName = " + methodName
+                    "Around 12345654321x1 moduleUserAspectjForKotlin className + " + className + ",methodName = " + methodName
             );
             return joinPoint.proceed();
         } catch (Exception e) {

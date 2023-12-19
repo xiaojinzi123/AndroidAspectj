@@ -29,11 +29,11 @@
         {
           "name": "AspectjPlugin-1.0.0-beta1.jar",
           "url": "AspectjPlugin-1.0.0-beta1.jar",
-          "size": 24400,
-          "sha512": "23776ea219f10b7f5906e5189c049c2891bceeb6a2fc2ce17384ff28949654bbbf554f3056f4bb33096ce8134271560375db553db949e2b6c4237d4e6d4dca3a",
-          "sha256": "80e73b6a2d234f203d35b7f93ac16ebdb18c4781fe562391f0d25ed3462803a2",
-          "sha1": "902c24ad0681e7085a0b0b319a094465071e7c5d",
-          "md5": "fcfb812fb9e233c7341549a26911023e"
+          "size": 25892,
+          "sha512": "7fb1d68539e6dc447782a5dcfa8c97b38c783c5d7953a6710270b88edaf3d3a1134ec5394cbf28f3bab9439233a3c43a6f2cd3bd79b74ea5b0635b715fb4c1a0",
+          "sha256": "753f86c68059df1209f964572e5cd7b8c8da8568531180cc97b8eaeda34cbef5",
+          "sha1": "d4037bae3807651aefe025f5554be5444c177fa6",
+          "md5": "1703c3046b71abc2a3196d5aa9552b4f"
         }
       ]
     },
@@ -68,11 +68,11 @@
         {
           "name": "AspectjPlugin-1.0.0-beta1.jar",
           "url": "AspectjPlugin-1.0.0-beta1.jar",
-          "size": 24400,
-          "sha512": "23776ea219f10b7f5906e5189c049c2891bceeb6a2fc2ce17384ff28949654bbbf554f3056f4bb33096ce8134271560375db553db949e2b6c4237d4e6d4dca3a",
-          "sha256": "80e73b6a2d234f203d35b7f93ac16ebdb18c4781fe562391f0d25ed3462803a2",
-          "sha1": "902c24ad0681e7085a0b0b319a094465071e7c5d",
-          "md5": "fcfb812fb9e233c7341549a26911023e"
+          "size": 25892,
+          "sha512": "7fb1d68539e6dc447782a5dcfa8c97b38c783c5d7953a6710270b88edaf3d3a1134ec5394cbf28f3bab9439233a3c43a6f2cd3bd79b74ea5b0635b715fb4c1a0",
+          "sha256": "753f86c68059df1209f964572e5cd7b8c8da8568531180cc97b8eaeda34cbef5",
+          "sha1": "d4037bae3807651aefe025f5554be5444c177fa6",
+          "md5": "1703c3046b71abc2a3196d5aa9552b4f"
         }
       ]
     },
@@ -88,11 +88,11 @@
         {
           "name": "AspectjPlugin-1.0.0-beta1-sources.jar",
           "url": "AspectjPlugin-1.0.0-beta1-sources.jar",
-          "size": 4453,
-          "sha512": "444094086a030527533843b2fb28c07e06557cd0235afb0c36996cd2344d9c714dbc74b91220b06f8b329c466fa5684c21218c8daa445121120e0759f781d6c3",
-          "sha256": "7d09020df124eac3b8cc1a47f91fcf09bda489bb41bb7638997f99c68a752c0b",
-          "sha1": "c79ad530485f1bd0a0f0c25dff7cd68b3c46daf0",
-          "md5": "f4bdbe19e23e8b8f5f3990669adac6fe"
+          "size": 4840,
+          "sha512": "b500e2b0e57a336d89e4104b658a2627d520423b19da7353473abf53d6fad66150371bdf4a3d85219780231dfe1634af6c389a6840fa8d40561876a628de9856",
+          "sha256": "6d983d0f3235703379fcd8aaa7f7291b6ff8c130b283359f388b8593bb823ca8",
+          "sha1": "b8131b935abaec73b7a62ffaa466d44b6e62660d",
+          "md5": "2880fa854e5efcd369c61f5b3abe5d6b"
         }
       ]
     },
@@ -109,10 +109,10 @@
           "name": "AspectjPlugin-1.0.0-beta1-javadoc.jar",
           "url": "AspectjPlugin-1.0.0-beta1-javadoc.jar",
           "size": 261,
-          "sha512": "c9726df4008d2ac2910e0b0e5ca336b42d47b53acd9a6c1f09ef2ee7b88508ee5212314c058ea2872f8476304aa3c63e94e05d2edb02bb8b4df0f76c4f06e77d",
-          "sha256": "f29b99891853584433b6ddfaa6dbbd65dcc163f48de9116e80e6f4f2727ae88d",
-          "sha1": "9ecec2c8d20af75b08e5c6472e6615611573b006",
-          "md5": "6b4ac639e63b0edddfc7eb7624948f38"
+          "sha512": "3216b27fec7b864e536d621260a83bf60e6d3f694dcce898a3088144ee502bf2697875dba0a0a269988a80909359c00390520e4b5c6ed9025e385692658a5ce0",
+          "sha256": "012edaaea33ec02353c0426f15598f6967118aa12d1862911a855deaf84fad55",
+          "sha1": "19b8980690e30c5fcae51c7fff724855aecbd317",
+          "md5": "020ef4a414ee1e830b2997dc51c54e0e"
         }
       ]
     }

@@ -1,7 +1,9 @@
 package com.xiaojinzi.aspectj.plugin.config
 
 data class AspectjConfig(
-    val enableLoopSolve: Boolean? = null,
+    val ignoreOutputJar: Boolean?,
+    val loopSolveCount: Int?,
+    val logError: Boolean,
     val sourceCompatibility: String,
     val targetCompatibility: String,
 )
