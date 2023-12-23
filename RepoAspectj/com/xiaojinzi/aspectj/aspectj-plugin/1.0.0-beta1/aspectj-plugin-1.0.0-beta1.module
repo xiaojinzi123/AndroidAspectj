@@ -29,11 +29,11 @@
         {
           "name": "aspectj-plugin-1.0.0-beta1.jar",
           "url": "aspectj-plugin-1.0.0-beta1.jar",
-          "size": 25892,
-          "sha512": "7fb1d68539e6dc447782a5dcfa8c97b38c783c5d7953a6710270b88edaf3d3a1134ec5394cbf28f3bab9439233a3c43a6f2cd3bd79b74ea5b0635b715fb4c1a0",
-          "sha256": "753f86c68059df1209f964572e5cd7b8c8da8568531180cc97b8eaeda34cbef5",
-          "sha1": "d4037bae3807651aefe025f5554be5444c177fa6",
-          "md5": "1703c3046b71abc2a3196d5aa9552b4f"
+          "size": 27451,
+          "sha512": "e1502815b40c761be9821e440b18242e380aaaecbde73d480ec902c762556f687784f54b8d1981b8177793b69d356e7bc553c7a71c5786cbf7bb1cbbb67e7ee1",
+          "sha256": "7d347b1d02d72f1259d4d39c7d2695ecd08376a8369aab3b738f42e04b67785f",
+          "sha1": "32c0f855b19ca885b6ccffb5fb417ae436b54a8b",
+          "md5": "978cf76010e6da542f48406a079010a8"
         }
       ]
     },
@@ -68,11 +68,11 @@
         {
           "name": "aspectj-plugin-1.0.0-beta1.jar",
           "url": "aspectj-plugin-1.0.0-beta1.jar",
-          "size": 25892,
-          "sha512": "7fb1d68539e6dc447782a5dcfa8c97b38c783c5d7953a6710270b88edaf3d3a1134ec5394cbf28f3bab9439233a3c43a6f2cd3bd79b74ea5b0635b715fb4c1a0",
-          "sha256": "753f86c68059df1209f964572e5cd7b8c8da8568531180cc97b8eaeda34cbef5",
-          "sha1": "d4037bae3807651aefe025f5554be5444c177fa6",
-          "md5": "1703c3046b71abc2a3196d5aa9552b4f"
+          "size": 27451,
+          "sha512": "e1502815b40c761be9821e440b18242e380aaaecbde73d480ec902c762556f687784f54b8d1981b8177793b69d356e7bc553c7a71c5786cbf7bb1cbbb67e7ee1",
+          "sha256": "7d347b1d02d72f1259d4d39c7d2695ecd08376a8369aab3b738f42e04b67785f",
+          "sha1": "32c0f855b19ca885b6ccffb5fb417ae436b54a8b",
+          "md5": "978cf76010e6da542f48406a079010a8"
         }
       ]
     },
@@ -88,11 +88,11 @@
         {
           "name": "aspectj-plugin-1.0.0-beta1-sources.jar",
           "url": "aspectj-plugin-1.0.0-beta1-sources.jar",
-          "size": 4840,
-          "sha512": "b500e2b0e57a336d89e4104b658a2627d520423b19da7353473abf53d6fad66150371bdf4a3d85219780231dfe1634af6c389a6840fa8d40561876a628de9856",
-          "sha256": "6d983d0f3235703379fcd8aaa7f7291b6ff8c130b283359f388b8593bb823ca8",
-          "sha1": "b8131b935abaec73b7a62ffaa466d44b6e62660d",
-          "md5": "2880fa854e5efcd369c61f5b3abe5d6b"
+          "size": 5015,
+          "sha512": "b4cf984e924c82a29879369ac854df82f8fa5ac5651dc38d5e87e15125b7ee7a6d997a0aa433caaae7e097ce026f20a64697381f7028c02a53f2e05267420333",
+          "sha256": "263daf6253901a692691959d1d7f1fcf53c887f2fb147d05eaf0975ec5979761",
+          "sha1": "e2a2b3bca84310e206f134fb6ee977013978c27b",
+          "md5": "9c8398aea55a9d4000650fb44803a1a7"
         }
       ]
     },
@@ -109,10 +109,10 @@
           "name": "aspectj-plugin-1.0.0-beta1-javadoc.jar",
           "url": "aspectj-plugin-1.0.0-beta1-javadoc.jar",
           "size": 261,
-          "sha512": "3216b27fec7b864e536d621260a83bf60e6d3f694dcce898a3088144ee502bf2697875dba0a0a269988a80909359c00390520e4b5c6ed9025e385692658a5ce0",
-          "sha256": "012edaaea33ec02353c0426f15598f6967118aa12d1862911a855deaf84fad55",
-          "sha1": "19b8980690e30c5fcae51c7fff724855aecbd317",
-          "md5": "020ef4a414ee1e830b2997dc51c54e0e"
+          "sha512": "7b819ad5ed099a7aa89a2eee80e784818fbf7775587c531bab8f499679b74d98491bf71b5e8a929b07129f9621ad982c2d4eefbf11d57c0c51b228980212775f",
+          "sha256": "c25b974a196a9f5b2e170bdafa46b861dda1c0238f8b77839b13029de6a96c5b",
+          "sha1": "8e5f41b87015045894897ff9615a6d6d2bfcc80f",
+          "md5": "f90401adbf116a2d8f8c7dd458fc82b8"
         }
       ]
     }

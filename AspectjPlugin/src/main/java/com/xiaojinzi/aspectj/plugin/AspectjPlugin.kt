@@ -103,6 +103,7 @@ class AspectjPlugin : Plugin<Project> {
                 val handler = MessageHandler(true)
                 val list1 = listOf(
                     /*"-log", File(cacheFolder, "log.txt").path,*/
+                    "-g:none",
                     "-source", aspectjConfig.sourceCompatibility,
                     "-target", aspectjConfig.targetCompatibility,
                     "-inpath",
@@ -221,6 +222,17 @@ class AspectjPlugin : Plugin<Project> {
                         }
                     }
                 }
+            }
+
+            val targetLogFileList: Array<File>? = File("./").listFiles { dir, name ->
+                name.startsWith(prefix = "ajcore.") && name.endsWith(suffix = ".txt")
+            }
+
+            // 准备检查是否有 aspectj 的日志文件
+            println("$TAG, 删除 ${targetLogFileList?.size?: 0} 个 aspectj 的日志文件")
+
+            targetLogFileList?.forEach {
+                it.delete()
             }
 
         }
