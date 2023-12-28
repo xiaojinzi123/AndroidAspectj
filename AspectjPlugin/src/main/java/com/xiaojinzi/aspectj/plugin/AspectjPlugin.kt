@@ -68,7 +68,10 @@ class AspectjPlugin : Plugin<Project> {
         private val aspectjConfig = project.extra[EXT_ASPECTJ_CONFIG] as AspectjConfig
 
         // private val cacheFolder = File(project.buildDir, "aspectj")
-        private val cacheFolder = File(System.getProperty("java.io.tmpdir"), "aspectjFolder")
+        private val cacheFolder = File(
+            System.getProperty("java.io.tmpdir"),
+            "aspectjFolder${File.separatorChar}${project.rootProject.name}"
+        )
         private val aspectClassFolder = File(cacheFolder, "aspect")
         private val aspectInputClassFolder = File(cacheFolder, "inputClass")
         private val aspectOutputClassFolder = File(cacheFolder, "outputClass")
