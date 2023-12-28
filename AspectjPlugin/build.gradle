@@ -20,6 +20,7 @@ version = "1.0.0"
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
+    implementation project(":AspectjApi")
     implementation "org.ow2.asm:asm-commons:9.4"
     implementation "org.ow2.asm:asm-util:9.4"
     implementation 'com.android.tools.build:gradle:8.1.4'

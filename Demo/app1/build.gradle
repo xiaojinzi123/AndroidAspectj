@@ -73,6 +73,7 @@ android {
 }
 
 dependencies {
+    api project(':AspectjApi')
     api project(':Demo:module-user')
     api project(':Demo:module-base')
 }

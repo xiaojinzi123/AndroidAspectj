@@ -9,6 +9,7 @@ import com.joom.grip.Grip
 import com.joom.grip.GripFactory
 import com.joom.grip.annotatedWith
 import com.joom.grip.classes
+import com.xiaojinzi.aspectj.api.anno.AspectWeaveIgnore
 import com.xiaojinzi.aspectj.plugin.config.AspectjConfig
 import com.xiaojinzi.aspectj.plugin.config.AspectjInitConfig
 import org.aspectj.bridge.IMessage
@@ -167,25 +168,28 @@ class AspectjPlugin : Plugin<Project> {
                 }
                 .toSet()
 
-            // 找到需要忽略的所有 class
-            val targetAspectIgnoreClassNameSet = grip
+            // 找到需要忽略的所有 class 的前缀
+            val targetAspectIgnoreClassPrefixNameSet = grip
                 .select(classes)
                 .from(inputs)
                 .where(
                     annotatedWith(
                         annotationType = com.joom.grip.mirrors.getType(
-                            descriptor = "Lcom/xiaojinzi/aspectj/anno/AspectIgnore;",
+                            descriptor = "L${
+                                AspectWeaveIgnore::class.java.name.replace(
+                                    oldValue = ".",
+                                    newValue = "/",
+                                )
+                            };",
                         )
                     )
                 )
                 .execute()
                 .classes
                 .map { classMirror ->
-                    "${
-                        classMirror.name.replace(
-                            oldChar = '.', newChar = File.separatorChar,
-                        )
-                    }.class"
+                    classMirror.name.replace(
+                        oldChar = '.', newChar = File.separatorChar,
+                    )
                 }
                 .toSet()
 
@@ -223,9 +227,11 @@ class AspectjPlugin : Plugin<Project> {
                             )
                         }
                     }
-                    val isMatch = !jarEntry.isDirectory
-                            && !targetAspectIgnoreClassNameSet.contains(element = jarEntry.name)
-                            && pathMatcher.isMatch(path = jarEntry.name)
+
+                    val isMatch = !jarEntry.isDirectory && !targetAspectIgnoreClassPrefixNameSet
+                        .any {
+                            jarEntry.name.startsWith(prefix = it)
+                        } && pathMatcher.isMatch(path = jarEntry.name)
                     // 如果匹配了
                     if (isMatch) {
                         jarFile.getInputStream(jarEntry).use {
@@ -269,7 +275,9 @@ class AspectjPlugin : Plugin<Project> {
                             }
                         }
                         val isMatch =
-                            !targetAspectIgnoreClassNameSet.contains(element = relativePath) && pathMatcher.isMatch(
+                            !targetAspectIgnoreClassPrefixNameSet.any {
+                                relativePath.startsWith(prefix = it)
+                            } && pathMatcher.isMatch(
                                 path = relativePath
                             )
                         if (isMatch) {
