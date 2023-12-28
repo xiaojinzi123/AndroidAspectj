@@ -11,3 +11,31 @@ java {
         languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_17.toString()))
     }
 }
+
+group = 'com.xiaojinzi.aspectj'
+archivesBaseName = 'aspectj-api'
+version = versions.aspectj_plugin_upload_version
+
+dependencies {
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = archivesBaseName
+            version = version
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = "$rootDir/RepoAspectj"
+        }
+    }
+}

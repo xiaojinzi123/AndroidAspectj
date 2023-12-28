@@ -15,7 +15,7 @@ java {
 
 group = 'com.xiaojinzi.aspectj'
 archivesBaseName = 'aspectj-plugin'
-version = "1.0.0"
+version = versions.aspectj_plugin_upload_version
 
 dependencies {
     implementation gradleApi()

@@ -15,15 +15,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.xiaojinzi.aspectj.app1.TestAspectjForJava
-import com.xiaojinzi.aspectj.app1.TestAspectjForKotlin
 import com.xiaojinzi.aspectj.base.view.ActionButton
 import com.xiaojinzi.aspectj.base.view.AppbarNormal
-import com.xiaojinzi.aspectj.user.ModuleUserAspectjForKotlin
 import com.xiaojinzi.support.ktx.nothing
 import com.xiaojinzi.support.ktx.toStringItemDto
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.launch
 
 @InternalCoroutinesApi
 @ExperimentalMaterialApi
@@ -49,12 +45,6 @@ private fun MainView() {
                 .nothing(),
             text = "测试 Aspectj",
         ) {
-            TestAspectjForJava().test()
-            TestAspectjForKotlin().test()
-            ModuleUserAspectjForKotlin().test()
-            scope.launch {
-                TestAspectjForKotlin().testSuspend()
-            }
         }
 
     }

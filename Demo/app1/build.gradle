@@ -20,10 +20,11 @@ ksp {
 }*/
 
 aspectjConfig {
-    ignoreOutputJar = true
     enable = true
-    // logError = true
-    loopSolveCount = -1
+    enableAspectLog = true
+    includePackagePrefixSet = [
+            "com.xiaojinzi",
+    ]
 }
 
 android {
