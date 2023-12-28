@@ -15,25 +15,19 @@ java {
 
 group = 'com.xiaojinzi.aspectj'
 archivesBaseName = 'aspectj-plugin'
-version = "${versions.aspectj_plugin_upload_version}"
-
-// 配置模块的 freeCompilerArgs 参数
-/*tasks.withType(KotlinCompile).configureEach {
-    kotlinOptions {
-        freeCompilerArgs += [
-                "-Xjvm-default=all",
-        ]
-    }
-}*/
-
-/*kotlin {
-    jvmToolchain(JavaVersion.VERSION_17)
-}*/
+version = "1.0.0"
 
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
-    implementation 'com.android.tools.build:gradle:8.2.0'
+    implementation "org.ow2.asm:asm-commons:9.4"
+    implementation "org.ow2.asm:asm-util:9.4"
+    implementation 'com.android.tools.build:gradle:8.1.4'
+    // implementation 'com.android.tools.build:gradle:8.0.1'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation "com.joom.grip:grip:0.9.1"
+    implementation "org.javassist:javassist:3.26.0-GA"
+    implementation 'com.github.gundy:semver4j:0.16.4'
     // 依赖 aspectjtools
     implementation 'org.aspectj:aspectjtools:1.9.21'
 }
