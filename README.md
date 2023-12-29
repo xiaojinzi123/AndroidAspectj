@@ -1,6 +1,3 @@
-### 警告！！！！！！
-现在还在开发阶段, 切勿使用 !!!!!!!
-
 ### 依赖
 
 首先依赖 Aspectj 的运行时
@@ -13,7 +10,7 @@ api "org.aspectj:aspectjrt:1.9.21"
 在项目根目录依赖 Aspectj 的 Gradle 插件
 
 ```
-classpath "com.github.xiaojinzi123:AndroidAspectj:<version>"
+classpath "com.github.xiaojinzi123.AndroidAspectj:aspectj-plugin:<version>"
 ```
 
 然后在 Application 模块使用这个插件
