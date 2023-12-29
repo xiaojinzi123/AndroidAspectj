@@ -115,7 +115,9 @@ class AspectjPlugin : Plugin<Project> {
                 excludePackagePatternFormatSet = aspectjConfig.excludePackagePatternFormatSet,
             )
 
-            println("${AspectjPlugin.TAG} aspectjConfig = $aspectjConfig")
+            AspectjLog.d(
+                content = "aspectjConfig = $aspectjConfig"
+            )
 
             if (cacheFolder.exists() && !cacheFolder.deleteRecursively()) {
                 throw RuntimeException("文件夹删除失败: ${cacheFolder.path}")
@@ -123,8 +125,13 @@ class AspectjPlugin : Plugin<Project> {
             // cacheFolder.mkdirs()
             aspectClassFolder.mkdirs()
             aspectInputClassFolder.mkdirs()
-            println("${AspectjPlugin.TAG} cacheFolder = ${cacheFolder.path}")
-            println("${AspectjPlugin.TAG} allDirectories = ${allDirectories.get().joinToString()}")
+
+            AspectjLog.d(
+                content = "cacheFolder = ${cacheFolder.path}",
+            )
+            AspectjLog.d(
+                content = "allDirectories = ${allDirectories.get().joinToString()}",
+            )
 
             // /Users/hhkj/Documents/code/android/github/KComponent/Demo/app2/build/intermediates/classes/debug/ALL/classes.jar
             val outputFile = outputFile.asFile.get()
@@ -134,8 +141,13 @@ class AspectjPlugin : Plugin<Project> {
                 it.asFile != outputFile
             }
 
-            println("${AspectjPlugin.TAG} targetAllJarList = ${targetAllJarList.joinToString { it.asFile.path }}")
-            println("${AspectjPlugin.TAG} outputFile = (exists: ${outputFile.exists()}) ,${outputFile.path}")
+            AspectjLog.d(
+                content = "targetAllJarList = ${targetAllJarList.joinToString { it.asFile.path }}",
+            )
+
+            AspectjLog.d(
+                content = "outputFile = (exists: ${outputFile.exists()}) ,${outputFile.path}",
+            )
 
             // 输入的 jar、aar、源码
             val inputs: List<java.nio.file.Path> =
@@ -196,15 +208,21 @@ class AspectjPlugin : Plugin<Project> {
                 }
                 .toSet()
 
-            println("${AspectjPlugin.TAG} targetAspectClassNameSet = ${targetAspectClassNameSet.joinToString()}")
+            AspectjLog.d(
+                content = "targetAspectClassNameSet = ${targetAspectClassNameSet.joinToString()}",
+            )
 
             allDirectories
                 .get()
                 .apply {
-                    println("${AspectjPlugin.TAG} directory.size = ${this.size}")
+                    AspectjLog.d(
+                        content = "directory.size = ${this.size}",
+                    )
                 }
                 .forEach { directory ->
-                    println("${AspectjPlugin.TAG} ${directory.asFile.path}")
+                    AspectjLog.d(
+                        content = "directoryPath = ${directory.asFile.path}",
+                    )
                 }
 
             val jarOutput = JarOutputStream(
@@ -324,7 +342,9 @@ class AspectjPlugin : Plugin<Project> {
                     (classpath.files + targetAllJarList.map { it.asFile }).joinToString(
                         separator = File.pathSeparator,
                     ).apply {
-                        println("$TAG, classpath = $this")
+                        AspectjLog.d(
+                            content = "classpath = $this",
+                        )
                     },
                     "-bootclasspath",
                     bootClasspath
@@ -332,36 +352,46 @@ class AspectjPlugin : Plugin<Project> {
                         .joinToString(
                             separator = File.pathSeparator,
                         ).apply {
-                            println("$TAG, bootclasspath = $this")
+                            AspectjLog.d(
+                                content = "bootclasspath = $this",
+                            )
                         },
                 ),
                 messageHandler
             )
 
-            println("${AspectjPlugin.TAG} aspectj message log start")
+            AspectjLog.d(
+                content = "aspectj message log start",
+            )
             messageHandler.getMessages(null, true).forEach {
-                if (aspectjConfig.enableAspectLog) {
-                    when (it.kind) {
-                        IMessage.ERROR -> {
-                            logger.error(it.message, it.thrown)
-                            throw RuntimeException("aspectj weave failed")
-                        }
+                when (it.kind) {
+                    IMessage.ERROR -> {
+                        logger.error(it.message, it.thrown)
+                        throw RuntimeException("aspectj weave failed")
+                    }
 
-                        IMessage.WARNING -> {
+                    IMessage.WARNING -> {
+                        if (AspectjLog.enable) {
                             logger.warn(it.message, it.thrown)
                         }
+                    }
 
-                        IMessage.INFO -> {
+                    IMessage.INFO -> {
+                        if (AspectjLog.enable) {
                             logger.info(it.message, it.thrown)
                         }
+                    }
 
-                        IMessage.DEBUG -> {
+                    IMessage.DEBUG -> {
+                        if (AspectjLog.enable) {
                             logger.debug(it.message, it.thrown)
                         }
                     }
                 }
             }
-            println("${AspectjPlugin.TAG} aspectj message log end")
+            AspectjLog.d(
+                content = "aspectj message log end",
+            )
 
             aspectOutputClassFolder.walk().forEach { file ->
                 if (file.isFile) {
@@ -390,8 +420,6 @@ class AspectjPlugin : Plugin<Project> {
     override fun apply(project: Project) {
 
         val isApp = project.plugins.hasPlugin(AppPlugin::class.java)
-        // project.plugins.withType(AppPlugin::class.java)
-        println("$TAG, isApp = $isApp, project = ${project.name}")
 
         if (!isApp) {
             return
@@ -407,6 +435,7 @@ class AspectjPlugin : Plugin<Project> {
 
             val aspectjConfig = project.extensions.findByType(AspectjInitConfig::class.java)
             val isAspectjEnable = aspectjConfig?.enable ?: true
+            AspectjLog.enable = aspectjConfig?.enableAspectLog ?: false
             if (isAspectjEnable) {
 
                 val baseAppModuleExtension =
@@ -419,7 +448,6 @@ class AspectjPlugin : Plugin<Project> {
                     .set(
                         EXT_ASPECTJ_CONFIG,
                         AspectjConfig(
-                            enableAspectLog = aspectjConfig?.enableAspectLog ?: false,
                             enableAdvancedMatch = aspectjConfig?.enableAdvancedMatch ?: false,
                             sourceCompatibility = baseAppModuleExtension.compileOptions.sourceCompatibility.toString(),
                             targetCompatibility = baseAppModuleExtension.compileOptions.targetCompatibility.toString(),

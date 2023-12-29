@@ -1,7 +1,6 @@
 package com.xiaojinzi.aspectj.plugin.config
 
 data class AspectjConfig(
-    val enableAspectLog: Boolean,
     val enableAdvancedMatch: Boolean,
     val sourceCompatibility: String,
     val targetCompatibility: String,

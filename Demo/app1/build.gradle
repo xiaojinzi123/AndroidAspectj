@@ -21,7 +21,6 @@ ksp {
 
 aspectjConfig {
     enable = true
-    enableAspectLog = true
     includePackagePrefixSet = [
             "com.xiaojinzi",
     ]
@@ -63,6 +62,7 @@ android {
                     }
                 }
             }
+            aspectjConfig.enableAspectLog = true
         }
         release {
             minifyEnabled true
