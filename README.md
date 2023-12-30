@@ -4,17 +4,17 @@
 
 maven { url 'https://jitpack.io' }
 
-效[果如下：
+效果如下：
 ```
 dependencyResolutionManagement {
-		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-		repositories {
-		    ...
-			maven { url 'https://jitpack.io' }
-			...
-		}
+	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)[](url)
+	repositories {
+		// ...
+		maven { url 'https://jitpack.io' }
+		// ...
 	}
-```]()
+}
+```
 
 
 依赖 Aspectj 的运行时的包
