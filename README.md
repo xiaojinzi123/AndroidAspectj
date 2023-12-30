@@ -1,12 +1,30 @@
 ### 依赖
 
-首先依赖 Aspectj 的运行时
+添加 jitpack 仓库
+
+maven { url 'https://jitpack.io' }
+
+效[果如下：
+```
+dependencyResolutionManagement {
+		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+		repositories {
+		    ...
+			maven { url 'https://jitpack.io' }
+			...
+		}
+	}
+```]()
+
+
+依赖 Aspectj 的运行时的包
 ```
 api "org.aspectj:aspectjrt:1.9.21"
 ```
 
-下面的 <version> 请替换为这里的具体版本：[![](https://jitpack.io/v/xiaojinzi123/AndroidAspectj.svg)](https://jitpack.io/#xiaojinzi123/AndroidAspectj)
+最后依赖 Aspectj 的 Gradle 插件. 让项目中所有切面生效
 
+下面的 <version> 请替换为这里的具体版本：[![](https://jitpack.io/v/xiaojinzi123/AndroidAspectj.svg)](https://jitpack.io/#xiaojinzi123/AndroidAspectj)
 在项目根目录依赖 Aspectj 的 Gradle 插件
 
 ```
